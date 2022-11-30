@@ -29,7 +29,6 @@ export class DashboardComponent {
   }
 }
 
-
 /*
 TODO:
 - Datenmodell
