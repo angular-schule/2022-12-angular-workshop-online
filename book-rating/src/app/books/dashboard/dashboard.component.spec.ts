@@ -13,7 +13,8 @@ describe('DashboardComponent', () => {
     .compileComponents();
 
     fixture = TestBed.createComponent(DashboardComponent);
-    component = fixture.componentInstance;
+    component = fixture.componentInstance; // TS-Instanz
+    // fixture.nativeElement.querySelector() // DOM-Element
     fixture.detectChanges();
   });
 

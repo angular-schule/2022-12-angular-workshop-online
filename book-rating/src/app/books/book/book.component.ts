@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Book } from '../shared/book';
 
 @Component({
@@ -9,4 +9,16 @@ import { Book } from '../shared/book';
 export class BookComponent {
   // Daten dürfen von der Elternkomponente in dieses Property hineinfließen
   @Input() book?: Book;
+
+  // Daten fließen von der Kindkomponente zur Elternkomponente
+  @Output() rateUp = new EventEmitter<Book>();
+  @Output() rateDown = new EventEmitter<Book>();
+
+  doRateUp() {
+    this.rateUp.emit(this.book);
+  }
+
+  doRateDown() {
+    this.rateDown.emit(this.book);
+  }
 }
