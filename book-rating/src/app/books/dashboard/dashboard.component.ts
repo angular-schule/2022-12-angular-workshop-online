@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Book } from '../shared/book';
 import { BookRatingService } from '../shared/book-rating.service';
+import { BookStoreService } from '../shared/book-store.service';
 
 @Component({
   selector: 'br-dashboard',
@@ -10,23 +11,10 @@ import { BookRatingService } from '../shared/book-rating.service';
 export class DashboardComponent {
   books: Book[] = [];
 
-  constructor(private rs: BookRatingService) {
-    this.books = [
-      {
-        isbn: '123',
-        title: 'Angular',
-        rating: 5,
-        price: 42.9,
-        description: 'Das große Praxisbuch'
-      },
-      {
-        isbn: '456',
-        title: 'Vue.js',
-        rating: 3,
-        price: 36.9,
-        description: 'Das grüne Framework'
-      }
-    ];
+  constructor(private rs: BookRatingService, private bs: BookStoreService) {
+    this.bs.getAll().subscribe(books => {
+      this.books = books;
+    });
   }
 
   doRateUp(book: Book) {
