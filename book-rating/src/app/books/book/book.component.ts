@@ -9,6 +9,8 @@ import { Book } from '../shared/book';
 export class BookComponent {
   // Daten dürfen von der Elternkomponente in dieses Property hineinfließen
   @Input() book?: Book;
+  @Input() minRating = 0;
+  @Input() maxRating = 10;
 
   // Daten fließen von der Kindkomponente zur Elternkomponente
   @Output() rateUp = new EventEmitter<Book>();
