@@ -44,6 +44,8 @@ export class DashboardComponent {
     // [1,2,3,4,5,6,7,8,9,10].filter(e => e > 5) // [6, 7, 8, 9, 10]
 
     this.books = this.books.map(book => {
+      console.log('RB', ratedBook);
+      console.log('B', book);
       if (ratedBook.isbn === book.isbn) {
         return ratedBook;
       } else {
