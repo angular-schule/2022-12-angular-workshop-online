@@ -1,7 +1,9 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { of } from 'rxjs';
 import { Book } from '../shared/book';
 import { BookRatingService } from '../shared/book-rating.service';
+import { BookStoreService } from '../shared/book-store.service';
 
 import { DashboardComponent } from './dashboard.component';
 
@@ -20,6 +22,12 @@ describe('DashboardComponent', () => {
           provide: BookRatingService,
           useValue: { // Stub
             rateUp: (b: Book) => b
+          }
+        },
+        {
+          provide: BookStoreService,
+          useValue: {
+            getAll: () => of([])
           }
         }
       ]
@@ -43,7 +51,7 @@ describe('DashboardComponent', () => {
 
     // service.rateUp überwachen, originale Methode des Stubs aber weiterhin verwenden
     // Mock
-    spyOn(service, 'rateUp').and.callThrough();
+    spyOn(service, 'rateUp').and.callThrough(); // returnValue() // callFake()
 
     // Act
     // Dummy-Buch an doRateUp übergeben
