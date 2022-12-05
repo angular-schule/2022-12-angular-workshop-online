@@ -1,4 +1,15 @@
+
+
 <div class="container">
+  <nav>
+    <a routerLink="/books"
+      [routerLinkActive]="['active']"
+      class="me-2"
+      [routerLinkActiveOptions]="{ exact: true }">Dashboard</a>
+    <a routerLink="/books/create" routerLinkActive="active" class="me-2">Create</a>
+    <a routerLink="/books/search" routerLinkActive="active" class="me-2">Search</a>
+  </nav>
+
   <h1>{{ title }}</h1>
 
   <router-outlet></router-outlet>
