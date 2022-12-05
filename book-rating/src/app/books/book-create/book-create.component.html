@@ -1,3 +1,38 @@
-<input type="text" [(ngModel)]="myObj.title">
+<form [formGroup]="bookForm">
+  <div class="form-group">
+    <label for="isbnInput">ISBN</label>
+    <input id="isbnInput" type="text" class="form-control" formControlName="isbn">
+    <div class="feedback-error" *ngIf="isInvalid('isbn')">Die ISBN ist ungültig.</div>
+    <div class="feedback-error" *ngIf="hasError('isbn', 'required')">Die ISBN fehlt.</div>
+    <div class="feedback-error" *ngIf="hasError('isbn', 'maxlength')">Die ISBN ist zu lang.</div>
+    <div class="feedback-error" *ngIf="hasError('isbn', 'pattern')">Die ISBN ist keine Zahl!</div>
+    <div class="feedback-error" *ngIf="hasError('isbn', 'minlength')">Die ISBN ist zu kurz.</div>
 
-{{ myObj | json }}
+    <pre>{{ bookForm.controls.isbn.errors | json }}</pre>
+
+    <!--<br-form-errors controlName="isbn" [messages]="{ minlength: 'ZU KURZ' }"></br-form-errors>-->
+  </div>
+
+  <div class="form-group">
+    <label for="titleInput">Titel</label>
+    <input id="titleInput" type="text" class="form-control" formControlName="title">
+  </div>
+
+  <div class="form-group">
+    <label for="descInput">Beschreibung</label>
+    <textarea id="descInput" class="form-control" formControlName="description"></textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="ratingInput">Rating</label>
+    <input id="ratingInput" type="number" class="form-control" formControlName="rating" max="5">
+  </div>
+
+  <div class="form-group">
+    <label for="priceInput">Preis</label>
+    <input id="priceInput" type="number" class="form-control" formControlName="price">
+  </div>
+</form>
+
+
+<pre>{{ bookForm.value | json }}</pre>
