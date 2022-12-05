@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Book } from '../shared/book';
 
 @Component({
   selector: 'br-book-create',
@@ -35,7 +36,12 @@ export class BookCreateComponent {
     price: new FormControl(0, {
       nonNullable: true,
       validators: Validators.min(0)
-    })
+    }),
+    /*authors: new FormArray([
+      new FormControl('', { nonNullable: true }),
+      new FormControl('', { nonNullable: true }),
+      new FormControl('', { nonNullable: true }),
+    ])*/
   });
 
   isInvalid(controlName: string): boolean {
@@ -51,6 +57,10 @@ export class BookCreateComponent {
     const control = this.bookForm.get(controlName);
     // return control && errorCode ? control.getError(errorCode) : false;
     return !!control && control.touched && control.hasError(errorCode);
+  }
+
+  submitForm() {
+    const book: Book = this.bookForm.getRawValue();
   }
 }
 

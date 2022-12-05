@@ -1,4 +1,4 @@
-<form [formGroup]="bookForm">
+<form [formGroup]="bookForm" (ngSubmit)="submitForm()">
   <div class="form-group">
     <label for="isbnInput">ISBN</label>
     <input id="isbnInput" type="text" class="form-control" formControlName="isbn">
@@ -32,6 +32,12 @@
     <label for="priceInput">Preis</label>
     <input id="priceInput" type="number" class="form-control" formControlName="price">
   </div>
+
+  <!--<div formArrayName="authors">
+    <input type="text" *ngFor="let c of bookForm.controls.authors.controls; index as i" [formControlName]="i">
+  </div>-->
+
+  <button type="submit" class="btn btn-red" [disabled]="bookForm.invalid">Abschicken</button>
 </form>
 
 
