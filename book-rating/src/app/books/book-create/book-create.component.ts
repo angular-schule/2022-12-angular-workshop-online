@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Book } from '../shared/book';
+import { BookStoreService } from '../shared/book-store.service';
 
 @Component({
   selector: 'br-book-create',
@@ -44,6 +46,9 @@ export class BookCreateComponent {
     ])*/
   });
 
+
+  constructor(private bs: BookStoreService, private router: Router) {}
+
   isInvalid(controlName: string): boolean {
     const control = this.bookForm.get(controlName);
     // return control ? control.touched && control.invalid : false;
@@ -61,6 +66,10 @@ export class BookCreateComponent {
 
   submitForm() {
     const book: Book = this.bookForm.getRawValue();
+    this.bs.create(book).subscribe(receivedBook => {
+      this.router.navigate(['/books', receivedBook.isbn]); // Detailseite
+      // this.router.navigateByUrl('/books'); // Dashboard
+    });
   }
 }
 
