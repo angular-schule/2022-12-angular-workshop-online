@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Subject, ReplaySubject, scan, reduce } from 'rxjs';
+import { Subject, ReplaySubject, scan, reduce, startWith } from 'rxjs';
 
 @Component({
   selector: 'rxw-game-score',
@@ -19,6 +19,12 @@ export class GameScoreComponent {
      */
 
     /******************************/
+    // [1,2,3,4,5].reduce((acc, item) => acc + item); // 15
+
+    this.score$.pipe(
+      startWith(0),
+      scan((acc, item) => acc + item, 100),
+    ).subscribe(score => this.currentScore = score);
 
 
     /******************************/
