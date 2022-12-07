@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { concatMap, map, switchMap } from 'rxjs';
+import { concatMap, map, Observable, switchMap } from 'rxjs';
 import { Book } from '../shared/book';
 import { BookStoreService } from '../shared/book-store.service';
 
@@ -11,7 +11,7 @@ import { BookStoreService } from '../shared/book-store.service';
 })
 export class BookDetailsComponent {
 
-  book?: Book;
+  book$: Observable<Book>;
 
   constructor(private route: ActivatedRoute, private bs: BookStoreService) {
     // Synchroner Weg / PULL
@@ -19,11 +19,9 @@ export class BookDetailsComponent {
 
     // Asynchroner Weg / PUSH
 
-    this.route.paramMap.pipe(
+    this.book$ = this.route.paramMap.pipe(
       map(params => params.get('isbn')!),
       switchMap(isbn => this.bs.getSingle(isbn))
-    ).subscribe(book => {
-      this.book = book;
-    });
+    );
   }
 }
