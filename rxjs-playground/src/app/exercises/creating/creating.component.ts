@@ -51,7 +51,13 @@ export class CreatingComponent {
 
       setTimeout(() => sub.next(10), 2000)
       setTimeout(() => sub.next(15), 3000)
-      setTimeout(() => sub.complete(), 4000)
+      const to3 = setTimeout(() => sub.complete(), 4000)
+
+      // Teardown Logic
+      return () => {
+        clearTimeout(to3);
+      };
+
     }
 
     const obs: Observer<number> = {

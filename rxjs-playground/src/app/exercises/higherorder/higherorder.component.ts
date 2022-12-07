@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Subject, ReplaySubject, Observable, map, mergeAll, mergeMap, concatMap, switchMap, exhaustMap } from 'rxjs';
+import { Subject, ReplaySubject, Observable, map, mergeAll, mergeMap, concatMap, switchMap, exhaustMap, of, timer } from 'rxjs';
 
 import { ExerciseService } from '../exercise.service';
 
@@ -28,7 +28,13 @@ export class HigherorderComponent {
     /**************!!**************/
 
     this.result$ = this.source$.pipe(
+      exhaustMap(tier => this.es.echo(tier)),
     );
+
+
+    /*const foo = of(1,2,3,4,5,6).pipe(
+      mergeMap(zahl => timer(2000).pipe(map(() => zahl.toString(10))))
+    )*/
 
     /**************!!**************/
 
